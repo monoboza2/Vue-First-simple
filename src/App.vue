@@ -1,26 +1,64 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <header>
+    <h1>ระบบจัดการข้อมูลพนักงาน</h1>
+  </header>
+  <FormComponent @save="insertemp"></FormComponent>
+  <section class="employee-content" v-if="employees.length>0">
+    <h1>ข้อมูลพนักงาน</h1>
+    <ListData :employees="employees"/>
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import FormComponent from "./components/formcomponent.vue";
+import ListData from "./components/Listdata.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    ListData,
+    FormComponent,
+  },
+  data(){
+    return{
+      employees:[]
+    }
+  },
+ methods:{
+    insertemp(data){
+      this.employees.push(data)
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style scoped>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 3rem;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: purple;
+  color: white;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+.employee-content {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 3rem;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+.employee-content h1 {
+  font-size: 2rem;
+  border-bottom: 4px solid #ccc;
+  color: purple;
+  margin: 0 0 3rem 0;
+  text-align: center;
 }
 </style>
